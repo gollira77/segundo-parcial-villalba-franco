@@ -1,6 +1,7 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import sequelize from './src/config/database.js';
+import Movie from './src/models/movie.model.js';
 dotenv.config();
 
 const app = express();
@@ -15,3 +16,7 @@ app.listen(PORT, () => {
 sequelize.authenticate()
     .then(() => console.log('Se pudo Conectar a la base de datos'))
     .catch((err) => console.error('Hubo un error al querer conectarse a la base de datos:', err));
+
+sequelize.sync()
+    .then(() => console.log('Los modelos estan sincronizados'))
+    .catch((err) => console.error('Error al querer sincronizar los modelos:', err));
